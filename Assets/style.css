@@ -1,0 +1,39 @@
+#dashboard{
+    background-size: cover;
+    background-position-y: 40%;
+    background-color:rgb(83, 83, 83);
+    color:white;
+    position:relative !important;
+}
+
+#header h1{
+    font-size: 400%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-clip: text;
+}
+
+#main-container{
+    padding-left: 15px;
+}
+
+#search-container{
+    
+}
+
+#form-row{
+
+}
+
+#search-city{
+
+}
+
+#display-container{
+
+}
+
+#today{
+
+}
