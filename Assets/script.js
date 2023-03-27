@@ -19,12 +19,15 @@ function test(){
         console.log(response.main.temp);
         console.log(response.wind.speed);
         console.log(response.main.humidity);
+        let WeatherIcon="https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
         document.getElementById("city").innerHTML= " 5- Day Forecast: " +currentCity; 
 
         document.getElementById("temp").innerHTML = "Temp: " + response.main.temp+" F"; 
         document.getElementById("wind").innerHTML = "Wind: " + response.wind.speed+" mph"; 
         document.getElementById("humidity").innerHTML ="Humidity: " + response.main.humidity+"%"; 
         document.getElementById("date").innerHTML = "Date: "+response.dt; 
+        document.getElementById("icon").src=WeatherIcon;
+ 
         var myDate = new Date(response.dt *1000);
         //document.write(myDate.toGMTString()+"<br>"+myDate.toLocaleString());
         document.getElementById("date").innerHTML = "Date: "+myDate.toGMTString(); 
@@ -57,6 +60,8 @@ let getFiveDayForecast = (event) => {
                 console.log("Temp: " + dayData.main.temp);
                 console.log("Humidity: " +dayData.main.humidity);
                 console.log("The wind speed is: " + dayData.wind.speed);
+                let WeatherIcon="https://openweathermap.org/img/w/" + dayData.weather[0].icon + ".png";
+                document.getElementById("icon"+day).src=WeatherIcon;
                 document.getElementById(("temp"+day)).innerHTML = "Temp: " + dayData.main.temp+" F"; 
                 document.getElementById(("wind"+day)).innerHTML = "Wind: " + dayData.wind.speed+" mph"; 
                 document.getElementById(("humidity"+day)).innerHTML ="Humidity: " + dayData.main.humidity+"%"; 
