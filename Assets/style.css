@@ -37,3 +37,13 @@
 #today{
 
 }
+.forecast{
+    padding-left: 115px;
+    display: flex;
+}
+.one {
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

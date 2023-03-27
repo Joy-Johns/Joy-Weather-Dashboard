@@ -19,6 +19,8 @@ function test(){
         console.log(response.main.temp);
         console.log(response.wind.speed);
         console.log(response.main.humidity);
+        document.getElementById("city").innerHTML= " 5- Day Forecast: " +currentCity; 
+
         document.getElementById("temp").innerHTML = "Temp: " + response.main.temp+" F"; 
         document.getElementById("wind").innerHTML = "Wind: " + response.wind.speed+" mph"; 
         document.getElementById("humidity").innerHTML ="Humidity: " + response.main.humidity+"%"; 
@@ -28,7 +30,43 @@ function test(){
         document.getElementById("date").innerHTML = "Date: "+myDate.toGMTString(); 
 
     })
+    
+    getFiveDayForecast();
 
 }
+// 5 day forecast
+let getFiveDayForecast = (event) => {
+    let city = document.getElementById("search-city").value;
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + apiKey;
+    let previousDay = 0;
+    let day =1;
+    fetch(queryURL)
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+        for (let i = 0; i < response.list.length; i++) {
+            let dayData = response.list[i];
+            let date = dayData.dt_txt.split(" ");
+            let time = date[1];
+            date = date[0];
+
+            if (dayData.dt >= previousDay) {
+                previousDay = dayData.dt + 24*3600;
+                console.log(dayData.dt_txt);
+                console.log("Temp: " + dayData.main.temp);
+                console.log("Humidity: " +dayData.main.humidity);
+                console.log("The wind speed is: " + dayData.wind.speed);
+                document.getElementById("temp").innerHTML = "Temp: " + response.main.temp+" F"; 
+                document.getElementById("wind").innerHTML = "Wind: " + response.wind.speed+" mph"; 
+                document.getElementById("humidity").innerHTML ="Humidity: " + response.main.humidity+"%"; 
+                document.getElementById("date").innerHTML = "Date: "+response.dt; 
+            }
+          
+        }
+    })
+}
+
+
 document.getElementById("search-button").addEventListener("click", test);
 
