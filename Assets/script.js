@@ -57,10 +57,11 @@ let getFiveDayForecast = (event) => {
                 console.log("Temp: " + dayData.main.temp);
                 console.log("Humidity: " +dayData.main.humidity);
                 console.log("The wind speed is: " + dayData.wind.speed);
-                document.getElementById("temp").innerHTML = "Temp: " + response.main.temp+" F"; 
-                document.getElementById("wind").innerHTML = "Wind: " + response.wind.speed+" mph"; 
-                document.getElementById("humidity").innerHTML ="Humidity: " + response.main.humidity+"%"; 
-                document.getElementById("date").innerHTML = "Date: "+response.dt; 
+                document.getElementById(("temp"+day)).innerHTML = "Temp: " + dayData.main.temp+" F"; 
+                document.getElementById(("wind"+day)).innerHTML = "Wind: " + dayData.wind.speed+" mph"; 
+                document.getElementById(("humidity"+day)).innerHTML ="Humidity: " + dayData.main.humidity+"%"; 
+                document.getElementById(("date"+day)).innerHTML = "Date: "+dayData.dt_txt; 
+                day++;
             }
           
         }
