@@ -15,7 +15,16 @@ function test(){
     })
     .then((response) => {
         console.log(response);
+        console.log(response.dt);
+        console.log(response.main.temp);
+        console.log(response.wind.speed);
+        console.log(response.main.humidity);
+        document.getElementById("temp").innerHTML = response.main.temp; 
+        document.getElementById("wind").innerHTML = response.wind.speed; 
+        document.getElementById("humidity").innerHTML = response.main.humidity; 
+        document.getElementById("date").innerHTML = response.dt; 
     })
 
 }
 document.getElementById("search-button").addEventListener("click", test);
+
