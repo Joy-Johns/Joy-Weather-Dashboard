@@ -1,6 +1,10 @@
 let apiKey = "23d542f35a564bd8824f6ff80d210e45";
 let currentCity = "";
 let lastCity = ""; 
+let myCities = localStorage.getItem("myCities");
+if (myCities===undefined){
+    myCities=[];
+}
 
 
 
@@ -72,7 +76,15 @@ let getFiveDayForecast = (event) => {
         }
     })
 }
-
+function saveCity(data){
+    localStorage.setItem(data.data);
+    if (!myCities.includes(data)){
+      myCities.push(data)
+      localStorage.setItem("myCities", myCities);
+      historyList()
+    }
+  }
+  
 
 document.getElementById("search-button").addEventListener("click", test);
 
