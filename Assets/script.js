@@ -2,7 +2,7 @@ let apiKey = "23d542f35a564bd8824f6ff80d210e45";
 let currentCity = "";
 let lastCity = ""; 
 let myCities = localStorage.getItem("myCities");
-if (myCities===undefined){
+if (myCities==undefined){
     myCities=[];
 }
 
@@ -12,6 +12,7 @@ function test(){
     console.log("TaDa");
     currentCity = document.getElementById("search-city").value;
     console.log("Current City!" + currentCity)
+    saveCity(currentCity);
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial" + "&APPID=" + apiKey;
     fetch(queryURL)
     .then((response)=> {
@@ -77,14 +78,50 @@ let getFiveDayForecast = (event) => {
     })
 }
 function saveCity(data){
-    localStorage.setItem(data.data);
+    console.log("The data on saveCity "+ data);
+    localStorage.setItem(data,data);
+    
     if (!myCities.includes(data)){
-      myCities.push(data)
-      localStorage.setItem("myCities", myCities);
-      historyList()
+        console.log("No data previosly stored of that city");
+        myCities.push(data);
+        localStorage.setItem("myCities", myCities);
+        historyList()
     }
-  }
+    else{
+        console.log("The city was previosly stored");
+    }
   
+}
+  
+function historyList(){
+    console.log("HistoryList was called");
 
+    const historyList = document.querySelector(".history-list");
+    historyList.innerHTML= "";
+    console.log(myCities.length);
+    console.log(myCities)
+    for (let i=0; i< myCities.length; i++){
+        var button= document.createElement("button");
+        button.innerHTML= myCities[i];
+
+        let body= document.getElementsByClassName("history-list")[0];
+        body.appendChild(button);
+
+        button.addEventListener("click", function() {
+            document.getElementById("search-city").value= myCities[i];
+            test();
+        });
+    }
+}
+
+
+function clearHistory()
+{
+    localStorage.clear();
+    myCities = [];
+    document.querySelector(".history-list").innerHTML ="";
+    document.getElementById("search-city").value="";
+}
 document.getElementById("search-button").addEventListener("click", test);
-
+document.getElementById("clear-button").addEventListener("click", clearHistory);
+historyList();
